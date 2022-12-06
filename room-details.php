@@ -155,15 +155,16 @@ $room = $db->query("SELECT * FROM rooms WHERE id = {$id}")->fetch(PDO::FETCH_ASS
                             <div class="select-option">
                                 <label for="guest">Guests:</label>
                                 <select name="guest" id="guest">
-                                    <option value="">3 Adults</option>
+                                    <option value="3 Adults">3 Adults</option>
                                 </select>
                             </div>
                             <div class="select-option">
                                 <label for="room">Room:</label>
                                 <select name="room" id="room">
-                                    <option value="">1 Room</option>
+                                    <option value="1 Room">1 Room</option>
                                 </select>
                             </div>
+                            <input name="id_r" type="text" hidden value="<?= $id ?>">
                             <button type="submit">Check Availability</button>
                         </form>
                     </div>
