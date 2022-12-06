@@ -169,122 +169,43 @@
         <div class="container-fluid">
             <div class="hp-room-items">
                 <div class="row">
+                    <?php
+                    /** @var PDO $db */
+                    $db=require $_SERVER['DOCUMENT_ROOT'] . '/common/bd.php';
+                    $room=$db->query("SELECT *  FROM rooms WHERE id<5; ")->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($room as $rooms):
+                    ?>
                     <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="img/room/room-b1.jpg">
+                        <div class="hp-room-item set-bg" data-setbg="img/room/room-b<?= $rooms['id']?>.jpg">
                             <div class="hr-text">
-                                <h3>Double Room</h3>
-                                <h2>199$<span>/Pernight</span></h2>
+                                <h3><?= $rooms['name']?></h3>
+                                <h2><?= $rooms['price']?><span>/Pernight</span></h2>
                                 <table>
                                     <tbody>
                                         <tr>
                                             <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
+                                            <td><?= $rooms['Size']?></td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
+                                            <td><?= $rooms['Capacity']?></td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
+                                            <td><?= $rooms['Bed']?></td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
+                                            <td><?= $rooms['Services']?>, ...</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <a href="#" class="primary-btn">More Details</a>
+                                <a href="/room-details.php?id=<?= $rooms['id']?>" class="primary-btn">More Details</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="img/room/room-b2.jpg">
-                            <div class="hr-text">
-                                <h3>Premium King Room</h3>
-                                <h2>159$<span>/Pernight</span></h2>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">More Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="img/room/room-b3.jpg">
-                            <div class="hr-text">
-                                <h3>Deluxe Room</h3>
-                                <h2>198$<span>/Pernight</span></h2>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">More Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="img/room/room-b4.jpg">
-                            <div class="hr-text">
-                                <h3>Family Room</h3>
-                                <h2>299$<span>/Pernight</span></h2>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">More Details</a>
-                            </div>
-                        </div>
-                    </div>
+
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
@@ -299,6 +220,7 @@
                     <div class="section-title">
                         <span>Testimonials</span>
                         <h2>What Customers Say?</h2>
+
                     </div>
                 </div>
             </div>
