@@ -25,41 +25,61 @@
                 <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                     <div class="booking-form">
                         <h3>Booking Your Hotel</h3>
-                        <form action="#">
+
+                        <form action="handler/reserve.php" method="post">
                             <div class="check-date">
                                 <label for="date-in">Check In:</label>
-                                <input type="text" class="date-input" id="date-in">
+                                <input name="date_in" type="text" class="date-input" id="date-in">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">
                                 <label for="date-out">Check Out:</label>
-                                <input type="text" class="date-input" id="date-out">
+                                <input name="date_out" type="text" class="date-input" id="date-out">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="select-option">
                                 <label for="guest">Guests:</label>
-                                <select id="guest">
-                                    <option value="">2 Adults</option>
-                                    <option value="">3 Adults</option>
+                                <select name="guest" id="guest">
+                                    <option value="2 Adults">2 Adults</option>
+                                    <option value="3 Adults">3 Adults</option>
+                                </select>
+                            </div>
+                            <div class="select-option">
+                                <label for="rooms">Room:</label>
+                                <select name="rooms" id="rooms">
+                                    <option value="1 Room">1 Room</option>
                                 </select>
                             </div>
                             <div class="select-option">
                                 <label for="room">Room:</label>
-                                <select id="room">
-                                    <option value="">1 Room</option>
-                                    <option value="">2 Room</option>
+
+                                <select name="room" id="room">
+                                    <?php
+                                    /** @var PDO $db */
+                                    $db=require $_SERVER['DOCUMENT_ROOT'] . '/common/bd.php';
+                                    $room=$db->query("SELECT *  FROM rooms; ")->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($room as $rooms):
+                                        ?>
+                                    <option value="<?= $rooms['id']?>"><?= $rooms['name']?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <button type="submit">Check Availability</button>
                         </form>
+
                     </div>
                 </div>
             </div>
         </div>
         <div class="hero-slider owl-carousel">
-            <div class="hs-item set-bg" data-setbg="img/hero/hero-1.jpg"></div>
-            <div class="hs-item set-bg" data-setbg="img/hero/hero-2.jpg"></div>
-            <div class="hs-item set-bg" data-setbg="img/hero/hero-3.jpg"></div>
+            <?php
+            /** @var PDO $db */
+            $db=require $_SERVER['DOCUMENT_ROOT'] . '/common/bd.php';
+            $img=$db->query("SELECT *  FROM img; ")->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($img as $item){
+                echo '<div class="hs-item set-bg" data-setbg="data:image/png;base64,' . base64_encode($item['image']) . '"></div>';
+            }
+            ?>
         </div>
     </section>
     <!-- Hero Section End -->

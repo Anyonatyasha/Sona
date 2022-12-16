@@ -110,6 +110,7 @@ $room = $db->query("SELECT * FROM rooms WHERE id = {$id}")->fetch(PDO::FETCH_ASS
 
                     </div>
                     <div class="review-add">
+
                         <h4>Add Review</h4>
                         <form action="handler/reviews.php" class="ra-form" method="post">
                             <div class="row">
