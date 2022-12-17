@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <?php require $_SERVER['DOCUMENT_ROOT'] . '/parts/head.html' ?>
+<link rel="stylesheet" href="css/style_for_table.css">
 <body>
 <!-- Page Preloder -->
 <?php require $_SERVER['DOCUMENT_ROOT'] . '/parts/preloder.html' ?>
@@ -46,12 +47,48 @@
             </div>
             <div class="col-lg-12">
                 <label for="description">Description:</label>
-                <textarea name="description" placeholder="description"></textarea>
+                <textarea name="description"></textarea>
             </div>
             <button type="submit">add</button>
         </form>
     </div>
 </div>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Size</th>
+        <th>Capacity</th>
+        <th>Bed</th>
+        <th>Services</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    /** @var PDO $db */
+    $db = require $_SERVER['DOCUMENT_ROOT'] . '/common/bd.php';
+
+    $rooms = $db->query('SELECT * FROM rooms')
+        ->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($rooms as $room): ?>
+        <tr>
+            <td><?= $room['id']?></td>
+            <td><?= $room['name']?></td>
+            <td><?= $room['price']?></td>
+            <td><?= $room['Size']?></td>
+            <td><?= $room['Capacity']?></td>
+            <td><?= $room['Bed']?></td>
+            <td><?= $room['Services']?></td>
+            <td><?= $room['description']?></td>
+            <td><a href="/admin/form_update.php?id=<?= $room['id'] ?>">Редактировать</a>
+                <a href="/handler/rooms_delete.php?id=<?= $room['id'] ?>">Удалить</a></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
 <footer class="footer-section">
     <div class="container">
         <div class="footer-text">
