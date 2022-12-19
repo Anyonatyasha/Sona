@@ -71,7 +71,6 @@
                             </table>
                             <a href="/room-details.php?id=<?= $rooms['id']?>" class="primary-btn">More Details</a>
                         </div>
-
                     </div>
                 </div>
                 <?php endforeach; ?>
